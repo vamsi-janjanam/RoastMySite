@@ -2,9 +2,15 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { CATEGORY_META } from "@/lib/types";
 import type { RoastResult } from "@/lib/types";
 
+// vi.mock factories are hoisted above all imports/const declarations, so the
+// mock fns must be created via vi.hoisted() to be safely referenced inside them.
+const { analyzeSite, generateRoast } = vi.hoisted(() => ({
+  analyzeSite: vi.fn(),
+  generateRoast: vi.fn(),
+}));
+
 // Mock the analyze module: keep the REAL normalizeUrl (used for validation)
 // but stub analyzeSite so the route never performs a real network fetch.
-const analyzeSite = vi.fn();
 vi.mock("@/lib/analyze", async () => {
   const actual = await vi.importActual<typeof import("@/lib/analyze")>(
     "@/lib/analyze",
@@ -16,7 +22,6 @@ vi.mock("@/lib/analyze", async () => {
 });
 
 // Mock the roast module: generateRoast returns a fixed RoastResult.
-const generateRoast = vi.fn();
 vi.mock("@/lib/roast", () => ({
   generateRoast,
 }));
