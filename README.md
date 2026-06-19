@@ -4,6 +4,12 @@ Paste a website URL and let an AI return a brutally funny critique of it, plus a
 
 > The full product vision (and savage tone) lives in [`roast_my_site_spec.md`](./roast_my_site_spec.md).
 
+## Example
+
+<p align="center">
+  <img src="./docs/example.png" alt="Roast My Site results page — a 4.0/10 verdict with seven scored categories" width="640" />
+</p>
+
 ## The roast categories
 
 - ⚡ Loading Speed
@@ -24,12 +30,16 @@ Paste a website URL and let an AI return a brutally funny critique of it, plus a
 
 ## Getting started
 
+One command installs dependencies and starts the dev server:
+
 ```bash
-npm install
-npm run dev
+npm run up
 ```
 
 Then open [http://localhost:3000](http://localhost:3000).
+
+> Prefer the steps separately? `npm install` then `npm run dev`.
+> To install, build, and serve a production build in one go: `npm run serve`.
 
 ### Environment
 
@@ -45,6 +55,8 @@ ANTHROPIC_API_KEY=sk-ant-...
 
 | Command | Description |
 | --- | --- |
+| `npm run up` | Install deps + start the dev server (one command) |
+| `npm run serve` | Install deps + production build + serve |
 | `npm run dev` | Start the dev server |
 | `npm run build` | Production build |
 | `npm start` | Run the production server |
