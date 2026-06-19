@@ -39,7 +39,7 @@ The spec also describes a (tongue-in-cheek) paid "roast recovery" upsell CTA —
 
 ## Architecture / data flow
 
-URL input (`components/RoastForm.tsx`) → `POST /api/roast` (`app/api/roast/route.ts`) → `analyzeSite()` in `lib/analyze.ts` fetches the target page and extracts heuristic `SiteSignals` → `generateRoast()` in `lib/roast.ts` produces a `RoastResult`, either via the Claude API (model `claude-opus-4-8`, when `ANTHROPIC_API_KEY` is set) or a deterministic mock engine fallback (always works offline, and is also used on any Claude error so the route never 500s on AI issues) → results rendered by `components/FinalVerdict.tsx` (a `ScoreGauge` + seven `CategoryCard`s) plus `PaidCta`.
+URL input (`components/RoastForm.tsx`) → `POST /api/roast` (`app/api/roast/route.ts`) → `analyzeSite()` in `lib/analyze.ts` fetches the target page and extracts heuristic `SiteSignals` → `generateRoast()` in `lib/roast.ts` produces a `RoastResult`, either via the Claude API (model `claude-sonnet-4-6`, when `ANTHROPIC_API_KEY` is set) or a deterministic mock engine fallback (always works offline, and is also used on any Claude error so the route never 500s on AI issues) → results rendered by `components/FinalVerdict.tsx` (a `ScoreGauge` + seven `CategoryCard`s) plus `PaidCta`.
 
 The seven fixed roast categories and the shared types live in `lib/types.ts` (`CategoryKey`, `CATEGORY_META`, `SiteSignals`, `RoastResult`). These types are the contract between the analysis/roast backend and the results UI — respect them exactly.
 
